@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brainrotini Gamini - P2P Multiplayer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Login Screen with P2P Room Controls -->
+    <div id="loginScreen" class="login-screen">
+      <div class="login-card">
+        <h1>Brainrotini Gamini</h1>
+        <h2>Peer-to-Peer Multiplayer</h2>
+
+        <div class="login-form">
+          <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="20" />
+          <input type="text" id="roomCodeInput" placeholder="Room Code (e.g. ABC123)" maxlength="6" style="text-transform: uppercase;" />
+          
+          <div class="room-controls">
+            <button id="createRoomBtn" class="btn-primary">Create Room</button>
+            <div class="join-room-section">
+              <button id="joinRoomBtn" class="btn-secondary">Join Room</button>
+            </div>
+          </div>
+        </div>
+        
+        <div id="roomInfo" style="display: none;" class="room-info">
+          <div style="color: var(--success); margin-bottom: 10px;">
+            ✅ <strong>Room Created!</strong>
+          </div>
+          <div style="background: var(--card-light); padding: 15px; border-radius: 8px; margin: 10px 0;">
+            <div style="color: var(--muted); font-size: 14px;">Share this room code with friends:</div>
+            <div id="roomCodeDisplay" style="font-size: 24px; font-weight: bold; color: var(--accent); margin: 10px 0; letter-spacing: 3px;">ABC123</div>
+            <div style="color: var(--muted); font-size: 12px;">They can join by entering this code above</div>
+          </div>
+        </div>
+
+        <div class="p2p-info">
+          <h3 style="color: var(--text); margin: 20px 0 10px 0;">How to play:</h3>
+          <ul style="text-align: left; color: var(--muted); font-size: 14px; line-height: 1.6;">
+            <li><strong>Create Room:</strong> Start a new game session and get a room code</li>
+          </ul>
+          <div style="text-align: center; color: var(--muted); font-size: 14px; margin: 10px 0;"><strong>--OR--</strong></div>
+          <ul style="text-align: left; color: var(--muted); font-size: 14px; line-height: 1.6;">
+            <li><strong>Share Code:</strong> Give the room code to friends you want to play with</li>
+            <li><strong>Join Game:</strong> Players connect directly to each other's browsers</li>
+            <li><strong>Real-time Sync:</strong> All actions are synchronized across connected players</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Game Interface -->
+    <div id="gameInterface" class="game-interface" style="display: none;">
+      <!-- P2P Status Bar -->
+      <div class="p2p-status-bar">
+        <div class="p2p-status-item">
+          <span class="status-label">Room:</span>
+          <span id="currentRoomCode" class="status-value" style="cursor: pointer;" title="Click to reveal room code">••••••</span>
+        </div>
+        <div class="p2p-status-item">
+          <span class="status-label">Mode:</span>
+          <span id="hostStatus" class="status-value">Host</span>
+        </div>
+        <div class="p2p-status-item">
+          <span class="status-label">Status:</span>
+          <span id="connectionStatus" class="status-value status-connected">Connected</span>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px 0; position: relative;">
+        <div class="header-stats" style="position: absolute; left: 20px; display: flex; gap: 15px; align-items: center;">
+          <div class="stat-card">
+            <div class="big" id="currency">$0</div>
+            <div class="muted">Monini</div>
+          </div>
+          <div class="stat-card">
+            <div id="incomeBtn" class="medium">Income: $0/s</div>
+          </div>
+          <div class="stat-card">
+            <div id="playersOnline" class="medium">Players: 1</div>
+          </div>
+        </div>
+        
+        <div style="text-align: center;">
+          <h1>Brainrotini Gamini</h1>
+          <h2>P2P Multiplayer Session</h2>
+        </div>
+      </div>
+      
+      <!-- Full-width Spawner -->
+      <div class="spawner-container">
+        <div id="spawnList" class="scrolling-spawner"></div>
+      </div>
+
+      <div class="main-layout" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; align-items: start; padding: 15px;">
+        <!-- Column 1: Chat -->
+        <div class="column-1">
+          <div class="card chat-panel" style="height: 575px; display: flex; flex-direction: column;">
+            <div class="card-header">
+              <h3>Chat</h3>
+            </div>
+            <div id="chatMessages" class="chat-messages" style="flex-grow: 1; overflow-y: auto;">
+              <div class="chat-message system-message">
+                <div class="chat-text">Connected! Start chatting with your friends.</div>
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" id="chatInput" placeholder="Type a message..." maxlength="200" />
+              <button id="sendChatBtn">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Your Collection -->
+        <div class="column-2">
+          <div class="card" style="height: 575px; display: flex; flex-direction: column;">
+            <div class="card-header">
+              <h3>Your Brainrots</h3>
+              <div class="collection-stats">
+                <span id="ownedCount">0/5</span> creatures owned
+              </div>
+            </div>
+            <div id="ownedCreatures" class="owned-list" style="flex-grow: 1; overflow-y: auto;"></div>
+          </div>
+        </div>
+
+        <!-- Column 3: Your Stats & Upgrades -->
+        <div class="column-3">
+          <div class="card">
+            <div class="card-header">
+              <h3>Your Stats</h3>
+            </div>
+            <div class="stats-grid" style="gap: 8px; padding: 10px;">
+              <div class="stat-item" style="padding: 6px 8px; font-size: 12px;">
+                <span class="stat-label">Money Made:</span>
+                <span id="totalMoneyMade" class="stat-value">$0</span>
+              </div>
+              <div class="stat-item" style="padding: 6px 8px; font-size: 12px;">
+                <span class="stat-label">Creatures Bought:</span>
+                <span id="totalBought" class="stat-value">0</span>
+              </div>
+              <div class="stat-item" style="padding: 6px 8px; font-size: 12px;">
+                <span class="stat-label">Creatures Sold:</span>
+                <span id="totalSold" class="stat-value">0</span>
+              </div>
+              <div class="stat-item" style="padding: 6px 8px; font-size: 12px;">
+                <span class="stat-label">Upgrades:</span>
+                <span id="totalUpgrades" class="stat-value">0</span>
+              </div>
+              <div class="stat-item" style="padding: 6px 8px; font-size: 12px;">
+                <span class="stat-label">Discovered:</span>
+                <span id="discoveredCount" class="stat-value">0</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card" style="margin-top: 5px;">
+            <div class="card-header">
+              <h3>Upgrades</h3>
+            </div>
+            <div class="upgrades-grid" style="gap: 12px; padding: 15px;">
+              <div class="upgrade-item" id="maxUpgrade" style="padding: 10px 12px; font-size: 12px;">
+                <div class="upgrade-info">
+                  <div class="upgrade-name">Max Creatures +1</div>
+                  <div class="upgrade-desc">Increase collection limit</div>
+                </div>
+                <button class="upgrade-btn" data-upgrade="maxBrainrots">$1,000</button>
+              </div>
+              
+              <div class="upgrade-item" id="luckUpgrade" style="padding: 10px 12px; font-size: 12px;">
+                <div class="upgrade-info">
+                  <div class="upgrade-name">Global Luck Boost</div>
+                  <div class="upgrade-desc">Better spawn chances for all players</div>
+                </div>
+                <div class="upgrade-controls">
+                  <button class="upgrade-btn" data-upgrade="luck">$1,000,000</button>
+                  <span id="luckLevel" class="upgrade-level">0</span>
+                </div>
+              </div>
+              
+              <div class="upgrade-item" id="incomeUpgrade" style="padding: 10px 12px; font-size: 12px;">
+                <div class="upgrade-info">
+                  <div class="upgrade-name">Income Multiplier</div>
+                  <div class="upgrade-desc">Boost all income</div>
+                </div>
+                <div class="upgrade-controls">
+                  <button class="upgrade-btn" data-upgrade="incomeMultiplier">$100,000</button>
+                  <span id="incomeLevel" class="upgrade-level">1.0x</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 4: Connected Players & Leaderboard -->
+        <div class="column-4">
+          <div class="card">
+            <div class="card-header">
+              <h3>Connected Players</h3>
+              <div style="font-size: 12px; color: var(--muted);">P2P Direct Connection</div>
+            </div>
+            <div id="playersList" class="players-list"></div>
+          </div>
+
+          <div class="card" style="margin-top: 5px;">
+            <div class="card-header">
+              <h3>Room Leaderboard</h3>
+            </div>
+            <div id="leaderboard" class="leaderboard-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Music Player (below the 4 columns) -->
+      <div style="height: 150px; display: flex; align-items: center; justify-content: center; padding-top: 20px; padding-bottom: 0px;">
+        <div id="musicPlayer" class="music-player">
+          <div class="music-controls">
+            <div class="music-info">
+              <div id="nowPlaying" class="music-title">No music selected</div>
+              <div class="music-progress">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="progressBar" class="progress-slider" min="0" max="100" value="0">
+                <span id="totalTime">0:00</span>
+              </div>
+            </div>
+            <div class="volume-control">
+              <span class="volume-icon">🔊</span>
+              <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="5">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="errorModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h3>Error</h3>
+        <p id="errorMessage"></p>
+        <button onclick="closeModal('errorModal')">OK</button>
+      </div>
+    </div>
+
+    <div id="connectionModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h3>Connection Lost</h3>
+        <p>Lost connection to other players. Attempting to reconnect...</p>
+        <div class="loading-spinner"></div>
+        <button onclick="window.location.reload()">Refresh Page</button>
+      </div>
+    </div>
+
+    <div id="hostLeftModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h3>Host Disconnected</h3>
+        <p>The room host has disconnected. The game session has ended.</p>
+        <button onclick="window.location.reload()">Return to Lobby</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
+  <script>
+    // Room code visibility toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const roomCodeElement = document.getElementById('currentRoomCode');
+      let isRevealed = false;
+      let actualRoomCode = roomCodeElement.textContent; // Capture the current room code
+      
+      roomCodeElement.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if (!isRevealed) {
+          roomCodeElement.textContent = actualRoomCode;
+          roomCodeElement.title = 'Click to hide room code';
+          isRevealed = true;
+        } else {
+          roomCodeElement.textContent = '••••••';
+          roomCodeElement.title = 'Click to reveal room code';
+          isRevealed = false;
+        }
+      });
+      
+      // Monitor for changes to the room code and update our stored value
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' || mutation.type === 'characterData') {
+            const newText = roomCodeElement.textContent;
+            if (newText !== '••••••' && newText !== actualRoomCode) {
+              actualRoomCode = newText;
+              // If currently revealed, keep it revealed with the new code
+              if (isRevealed) {
+                roomCodeElement.textContent = actualRoomCode;
+              } else {
+                // If hidden, hide the new code
+                roomCodeElement.textContent = '••••••';
+              }
+            }
+          }
+        });
+      });
+      
+      observer.observe(roomCodeElement, {
+        childList: true,
+        characterData: true,
+        subtree: true
+      });
+      
+      // Function to update the actual room code (called from game.js)
+      window.updateRoomCodeDisplay = (newCode) => {
+        actualRoomCode = newCode;
+        if (!isRevealed) {
+          roomCodeElement.textContent = '••••••';
+        }
+      };
+    });
+  </script>
+  
+  <style>
+    /* Additional P2P-specific styles */
+    .p2p-notice {
+      background: var(--card-light);
+      border: 1px solid var(--success);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .room-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .join-room-section {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .join-room-section input {
+      flex: 1;
+    }
+
+    .btn-primary, .btn-secondary {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: #6d28d9;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--success);
+      color: white;
+      min-width: 120px;
+    }
+
+    .btn-secondary:hover {
+      background: #059669;
+    }
+
+    .room-info {
+      background: var(--card-light);
+      border: 1px solid var(--success);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .p2p-info {
+      background: var(--card-light);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .p2p-info ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .p2p-info li {
+      margin: 8px 0;
+    }
+
+    .p2p-status-bar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .p2p-status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-label {
+      color: var(--muted);
+    }
+
+    .status-value {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .status-connected {
+      color: var(--success);
+    }
+
+    .status-disconnected {
+      color: var(--error);
+    }
+
+    .status-connecting {
+      color: var(--warning);
+    }
+
+    .system-message {
+      border-left-color: var(--success) !important;
+      background: rgba(16, 185, 129, 0.1) !important;
+    }
+
+    .system-message .chat-text {
+      color: var(--success);
+      font-style: italic;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Responsive adjustments for P2P interface */
+    @media (max-width: 768px) {
+      .p2p-status-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      
+      .join-room-section {
+        flex-direction: column;
+      }
+      
+      .join-room-section input {
+        width: 100%;
+      }
+    }
+
+    /* Animation for room code display */
+    #roomCodeDisplay {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+  </style>
+</body>
+</html>

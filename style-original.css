@@ -1,0 +1,290 @@
+/* Urban Shadow Custom Font */
+@font-face {
+  font-family: 'Urban Shadow';
+  src: url('assets/fonts/Urban Shadow Sans Serif.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root{--bg:#24365c;--card:#111827;--muted:#9ca3af;--accent:#7c3aed;--success:#10b981}
+html,body{
+  height:100%;
+  margin:0;
+  background: var(--bg) url('assets/images/BRGameBackground.png') center center/cover no-repeat;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+  color:#e6eef8;
+  overflow-x:hidden
+}
+
+/* Apply Urban Shadow font to titles */
+h1, h2 {
+  font-family: 'Urban Shadow', Arial, sans-serif !important;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black, 1px 1px 0px black;
+}
+
+/* Music Player Styles */
+.music-player {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  background: var(--card);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(2,6,23,.6);
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.music-btn {
+  background: var(--accent);
+  border: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+
+.music-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.music-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.music-progress {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.progress-slider, .volume-slider {
+  appearance: none;
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(255,255,255,0.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.progress-slider {
+  flex: 1;
+  min-width: 60px;
+}
+
+.volume-slider {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.progress-slider::-webkit-slider-thumb, .volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.progress-slider::-moz-range-thumb, .volume-slider::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.volume-icon {
+  font-size: 10px;
+}
+
+.app{max-width:100%;margin:28px auto;padding:18px;display:grid;grid-template-rows:auto 1fr;gap:12px;overflow-x:hidden}
+header{display:flex;justify-content:center;align-items:flex-start;margin-bottom:12px;position:relative}
+header .stat{position:static;transform:none}
+header h1{position:absolute;top:50%;left:50%;transform:translate(calc(-50% - 443.5px), -50%);z-index:10}
+header h2{position:absolute;top:50%;left:50%;transform:translate(calc(-50% + 443.5px), -50%);z-index:10}
+h1,h2{font-size:24px;margin:0}
+.card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,.6)}
+button{background:var(--accent);border:0;padding:8px 12px;border-radius:8px;color:white;cursor:pointer}
+button.disabled{background:#4c1d95;cursor:not-allowed;opacity:0.6}
+.small{Padding:6px 10px;border-radius:8px;background:#111827;border:1px solid rgba(255,255,255,.03)}
+.sell-option{border-radius:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;cursor:pointer;color:var(--muted);transition:background .12s ease,color .12s ease}
+.sell-option:hover{background:rgba(255,255,255,0.03);color:#e6eef8}
+/* small colored dot to the left indicating rarity */
+.sell-option::before{content:'';width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px}
+.sell-option[data-rarity="all"]::before{background:#f5f5f5}
+.sell-option[data-rarity="Common"]::before{background:#6b7280}
+.sell-option[data-rarity="Uncommon"]::before{background:#10b981}
+.sell-option[data-rarity="Rare"]::before{background:#3b82f6}
+.sell-option[data-rarity="Epic"]::before{background:#7c3aed}
+.sell-option[data-rarity="Legendary"]::before{background:#f97316}
+.sell-option[data-rarity="Mythic"]::before{background:#ef4444}
+.sell-option[data-rarity="Brainrot God"]::before{background:#fbbf24}
+.sell-option[data-rarity="Secret"]::before{background:#050505ff}
+.sell-option[data-rarity="OG"]::before{background:#0ef306ff}
+
+/* dropdown menu container subtle divider and padding */
+#sellDropdownMenu{min-width:180px;padding:6px;border-radius:8px;background:var(--card);box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+
+/* Sell dropdown toggle styling - match button sizing but use a grey tone */
+#sellDropdownToggle{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;background:#374151;border:0;color:#ffffff;font-weight:600;cursor:pointer}
+#sellDropdownToggle:hover{background:#475569}
+#sellDropdownToggle::after{content:'▾';display:inline-block;transform-origin:center;transition:transform .18s ease;color:inherit}
+#sellDropdownToggle[data-open="true"]::after{transform:rotate(180deg)}
+/* creature name and rarity styling */
+.creature-name{font-weight:700;font-size:15px}
+.rarity-text{font-weight:700;font-size:13px;color:var(--muted)}
+
+/* Duplicate block removed (toggle already styled above) */
+.stat{display:flex;gap:12px;align-items:center}
+.currency-stack{display:flex;flex-direction:column;align-items:flex-end;justify-content:center}
+.currency-stack .big{line-height:1}
+.list{overflow:none;margin-top:5px}
+.item{display:flex;justify-content:space-between;padding:8px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,rgba(255,255,255,0.5),transparent)}
+/* Rarity backgrounds (expanded list: common, uncommon, rare, epic, legendary, mythic, secret) */
+.rarity-Common{background:linear-gradient(180deg,rgba(107,114,128,0.10),rgba(17,24,39,0.02));border-left:4px solid #6b7280}
+.rarity-Uncommon{background:linear-gradient(180deg,rgba(16,185,129,0.10),rgba(17,24,39,0.02));border-left:4px solid #10b981}
+.rarity-Rare{background:linear-gradient(180deg,rgba(59,130,246,0.10),rgba(17,24,39,0.02));border-left:4px solid #3b82f6}
+.rarity-Epic{background:linear-gradient(180deg,rgba(124,58,237,0.10),rgba(17,24,39,0.02));border-left:4px solid #7c3aed}
+.rarity-Legendary{background:linear-gradient(180deg,rgba(249,115,22,0.10),rgba(17,24,39,0.02));border-left:4px solid #f97316}
+.rarity-Mythic{background:linear-gradient(180deg,rgba(239,68,68,0.10),rgba(17,24,39,0.02));border-left:4px solid #ef4444}
+.rarity-Brainrot-God{background:linear-gradient(180deg,rgba(251,191,36,0.10),rgba(17,24,39,0.02));border-left:4px solid #fbbf24}
+.rarity-Secret{background:linear-gradient(180deg,rgba(5,5,5,0.10),rgba(17,24,39,0.02));border-left:4px solid #050505ff}
+.rarity-OG{background:linear-gradient(180deg,rgba(14,243,6,0.10),rgba(17,24,39,0.02));border-left:4px solid #0ef306ff}
+/* Reset button (danger) */
+.btn-danger{background:#b91c1c;border:0;padding:8px 12px;border-radius:8px;color:white;cursor:pointer}
+.btn-danger:hover{background:#991b1b}
+/* Modal */
+/* ensure hidden state overrides the modal-overlay display:flex rule */
+.modal-overlay.hidden{display:none}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:1200}
+.modal-box{background:var(--card);padding:18px;border-radius:12px;width:450px; max-width:1200px;color:inherit;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+.modal-box-collection{background:var(--card);padding:18px;border-radius:12px;width:900px; max-width:1200px;color:inherit;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+.modal-box-about{background:var(--card);padding:18px;border-radius:12px;width:900px; max-width:1200px;color:inherit;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+.modal-box-sell{background:var(--card);padding:18px;border-radius:12px;width:400px; max-width:500px;color:inherit;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+
+/* Collection grid row separators */
+#collectionGrid > div {
+  padding: 1px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Header row styling */
+.collection-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.row{display:flex;gap:8px;margin-top:-4px}
+.muted{color:var(--muted)}
+.big{font-size:22px;font-weight:700}
+.main-grid{display:grid;grid-template-columns:500px 375px 500px;gap:12px;justify-content:center}
+
+/* Responsive breakpoints to prevent card overlap */
+@media (max-width: 1450px) {
+  .main-grid{grid-template-columns:1fr 300px 1fr;gap:8px;justify-content:center}
+  .app{max-width:100%;padding:12px}
+  header h1{left:25%;transform:translateX(-50%)}
+}
+
+@media (max-width: 1200px) {
+  .main-grid{grid-template-columns:1fr 1fr 1fr;gap:8px;justify-content:center}
+  .app{max-width:100%;padding:12px}
+  header h1{left:16.67%;transform:translateX(-50%)}
+}
+
+@media (max-width: 700px) {
+  .main-grid{grid-template-columns:1fr;gap:12px}
+  .app{padding:12px}
+  header .stat{position:static;transform:none;margin-top:12px}
+  header{flex-direction:column;align-items:center;gap:12px}
+}
+
+.small-card{
+  height:fit-content;
+  max-height:50%;
+  align-self:center;
+}
+
+.upgrade-item {
+  padding:12px;
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+  border:1px solid rgba(255,255,255,0.05);
+  transition:background 0.2s ease;
+}
+
+.upgrade-item:hover {
+  background:linear-gradient(180deg,rgba(255,255,255,0.05),transparent);
+}
+
+/* Emphasize the income display - bolder outline and text */
+#incomeBtn{
+	padding:6px 10px;border-radius:8px;background:#0b1220;border:2px solid rgba(255,255,255,0.06);font-weight:700;color:var(--muted);margin-right:8px}
+#incomeBtn{box-shadow:0 0 0 3px rgba(124,58,237,0.04)}
+
+/* Scrollbar styling for the two scrollable lists */
+#owned, #spawnList {
+	/* Firefox */
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255,255,255,0.08) rgba(255,255,255,0.02);
+}
+
+/* WebKit browsers */
+#owned::-webkit-scrollbar, #spawnList::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+#owned::-webkit-scrollbar-track, #spawnList::-webkit-scrollbar-track {
+	background: rgba(255,255,255,0.02);
+	border-radius: 8px;
+}
+#owned::-webkit-scrollbar-thumb, #spawnList::-webkit-scrollbar-thumb {
+	background: rgba(255,255,255,0.08);
+	border-radius: 8px;
+	border: 2px solid transparent; /* gives padding look */
+	background-clip: padding-box;
+}
+#owned::-webkit-scrollbar-thumb:hover, #spawnList::-webkit-scrollbar-thumb:hover {
+	background: rgba(255,255,255,0.16);
+}
+
+/* Collection modal row styles */
+.collection-row{display:grid;grid-template-columns:6px 1fr 110px 90px 64px;gap:10px;align-items:center;padding:8px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+.collection-bar{width:6px;height:28px;border-radius:6px}
+.collection-row .muted{font-size:13px;color:var(--muted)}
+.collection-row .name{font-weight:700}
+.collection-row .count{text-align:right;color:var(--muted)}
+.collection-header{color:var(--muted);font-size:13px}
+
+/* Collection grid: make header and rows share the same grid layout so columns align */
+#collectionGrid{display:grid;grid-template-columns:6px 450px 120px 150px 80px !important;gap:10px;max-height:360px;overflow:auto;padding:8px}
+#collectionGrid > .collection-headers > .collection-header{align-self:center}
+/* Make the header opaque and elevated so rows don't show through underneath */
+#collectionGrid > .collection-headers > .collection-header{position:sticky;top:0;background:var(--card);z-index:30;padding:8px 6px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(2,6,23,0.45)}
+#collectionGrid .collection-bar{height:28px}

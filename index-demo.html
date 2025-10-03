@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brainrotini Gamini - P2P Multiplayer</title>
+  <style>
+    /* Urban Shadow Custom Font */
+    @font-face {
+      font-family: 'Urban Shadow';
+      src: url('assets/fonts/Urban Shadow Sans Serif.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #24365c;
+      --card: #111827;
+      --card-light: #1f2937;
+      --muted: #9ca3af;
+      --text: #e6eef8;
+      --accent: #7c3aed;
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --border: #374151;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg) url('assets/images/BRGameBackground.png') center center/cover no-repeat;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1, h2 {
+      font-family: 'Urban Shadow', Arial, sans-serif !important;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black, 1px 1px 0px black;
+      margin: 0;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .preview-card {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.8);
+      max-width: 1600px;
+      width: 95vw;
+      margin: 20px auto;
+      border: 1px solid var(--border);
+    }
+
+    .big { font-size: 32px; font-weight: 700; }
+    .medium { font-size: 18px; font-weight: 600; margin: 20px 0; }
+    .muted { color: var(--muted); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .feature-item {
+      background: var(--card-light);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .feature-title {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .setup-steps {
+      text-align: left;
+      background: var(--card-light);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    .setup-steps ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .setup-steps li {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      margin: 10px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #6d28d9;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--success);
+    }
+
+    .btn-secondary:hover {
+      background: #059669;
+    }
+
+    .btn-large {
+      padding: 20px 40px;
+      font-size: 18px;
+      margin: 15px;
+    }
+
+    .p2p-highlight {
+      background: linear-gradient(135deg, var(--success), var(--accent));
+      padding: 30px;
+      border-radius: 16px;
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .p2p-highlight h3 {
+      color: white;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .p2p-highlight p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+      .preview-card {
+        margin: 10px;
+        padding: 20px;
+      }
+      
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="preview-card">
+      <h1>Brainrotini Gamini</h1>
+      <h2>Multiplayer Edition</h2>
+      <div class="medium">Fight over Brainrots with your friends!</div>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-title">🔗 Direct Connection</div>
+          <div class="muted">Players connect directly to each other using WebRTC - no central server needed</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-title">🎮 Real-time Gameplay</div>
+          <div class="muted">Synchronized creature spawns, purchases, and leaderboards across all connected players</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-title">💬 Live Chat</div>
+          <div class="muted">Communicate with other players in real-time while collecting creatures</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-title">🏆 Competitive</div>
+          <div class="muted">Compete on leaderboards and see who can collect the rarest creatures</div>
+        </div>
+      </div>
+
+      <div style="margin: 40px 0;">
+        <a href="client/index.html" class="btn btn-large">🌐 Play Multiplayer Now!</a>
+        <button onclick="playOriginal()" class="btn btn-secondary">🎮 Play Original Solo</button>
+      </div>
+
+      <div class="setup-steps">
+        <h3>🚀 How to Play (Super Easy!):</h3>
+        <ol style="color: var(--text); padding: 15px;">
+          <li><strong>Click "Play P2P Multiplayer Now!"</strong> above</li>
+          <li><strong>Enter your name</strong> to join the game</li>
+          <li><strong>Create a room</strong> (you become host) or <strong>join</strong> with a friend's room code</li>
+          <li><strong>Share your room code</strong> with friends (e.g., "ABC123")</li>
+          <li><strong>Play together instantly!</strong> Works in Chrome, Firefox, Safari, Edge</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function playOriginal() {
+      window.location.href = 'https://n7soul.github.io/BRGame/';
+    }
+
+    // Simple background animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.feature-item');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.2}s`;
+        card.style.animation = 'slideIn 0.6s ease forwards';
+      });
+    });
+
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
