@@ -35,7 +35,7 @@ Want to try the original game? Open https://n7soul.github.io/BRGame/ for the cla
 ## Multiplayer Features
 
 ### Real-time Synchronization
-- **Shared Spawns**: All players see the same creatures appear
+- **Shared Spawns**: All players see the same brainrots appear
 - **Live Updates**: Instant leaderboard and player status updates
 - **Chat System**: Real-time messaging between players
 
@@ -53,7 +53,7 @@ Want to try the original game? Open https://n7soul.github.io/BRGame/ for the cla
 - **Responsive Design**: Works on desktop and mobile browsers
 
 ### Game Logic
-- **100+ Creatures**: 9 rarity tiers from Common to OG
+- **100+ Brainrots**: 9 rarity tiers from Common to OG
 - **Upgrade System**: Improve money generation and creature discovery
 - **Anti-Spam**: Rate limiting and validation
 
