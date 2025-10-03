@@ -1,19 +1,17 @@
-# Brainrotini Gamini - P2P Multiplayer Edition
+# Brainrotini Gamini - Multiplayer Edition
 
-A peer-to-peer multiplayer creature collection game where players can compete, trade, and chat while collecting various "Brainrot" creatures. No server setup required!
-
-## 🚀 **Zero-Setup P2P Multiplayer**
+A peer-to-peer multiplayer creature collection game where players can compete and chat while collecting various Brainrots!
 
 ### Features
 - **Instant Play**: Works immediately in any modern browser
-- **Direct Connection**: Players connect directly using WebRTC technology
 - **Room-Based**: Create or join rooms with simple 6-character codes
-- **No Installation**: No Node.js, no server, no downloads needed
+- **No Installation**: No downloads needed!
 - **Real-time Sync**: Live creature spawns, chat, and leaderboards
 
 ## Quick Start
 
-1. Open `client/index.html` in your browser
+1. Open https://n7soul.github.io/BRMPGame/ in your browser
+2. Select "Play Multiplayer Now!"
 2. Enter your player name
 3. **Create Room** or **Join Room** with a code
 4. Share the room code with friends
@@ -21,7 +19,7 @@ A peer-to-peer multiplayer creature collection game where players can compete, t
 
 ## Alternative Single-Player Mode
 
-Want to try the original game? Open `index-original.html` for the classic single-player experience.
+Want to try the original game? Open https://n7soul.github.io/BRGame/ for the classic single-player experience.
 
 ## Game Structure
 
@@ -41,17 +39,6 @@ BRMPGame/
 ├── index-demo.html        # Demo page with game info
 └── README.md             # This file
 ```
-
-## How to Play
-
-1. **Connect**: Create or join a room using a 6-character code
-2. **Collect Creatures**: Buy creatures that appear in the spawn list
-3. **Generate Income**: Owned creatures automatically generate money
-4. **Upgrade**: Purchase upgrades to improve your collection capabilities
-5. **Compete**: Climb the leaderboard by accumulating wealth
-6. **Chat**: Communicate with other players in real-time
-
-## P2P Technology
 
 ### WebRTC Implementation
 - **Direct Browser Connections**: No intermediary server needed
@@ -85,8 +72,7 @@ BRMPGame/
 - **Responsive Design**: Works on desktop and mobile browsers
 
 ### Game Logic
-- **100+ Creatures**: 8 rarity tiers from Common to Mythical
-- **Idle Mechanics**: Passive income generation
+- **100+ Creatures**: 9 rarity tiers from Common to OG
 - **Upgrade System**: Improve money generation and creature discovery
 - **Anti-Spam**: Rate limiting and validation
 
@@ -98,51 +84,19 @@ BRMPGame/
 - **Safari**: WebRTC support (iOS 11+)
 - **Edge**: Full WebRTC support
 
-### Requirements
-- **Modern Browser**: WebRTC and ES6 module support
-- **Internet Connection**: For STUN servers and initial discovery
-- **No Plugins**: Pure HTML5/JavaScript implementation
-
-## Troubleshooting
-
-### Connection Issues
-1. **Firewall/NAT**: Some corporate networks may block WebRTC
-2. **Browser Permissions**: Allow microphone/camera permissions if prompted
-3. **HTTPS**: Some browsers require HTTPS for WebRTC (use local file:// for testing)
-
-### Common Problems
-- **Room Not Found**: Double-check the 6-character room code
-- **Connection Failed**: Try refreshing and creating a new room
-- **No Other Players**: Share your room code with friends to join
-
-### Debug Mode
-Open browser console (F12) to see connection logs and debug information.
-
-## Development
-
-### File Structure
-- **client/game.js**: Core P2P networking and game logic
-- **shared/gameLogic.js**: Creature data and game mechanics
-- **client/style.css**: UI styling and responsive design
-
-### Customization
-- **Creature Data**: Edit `CREATURES` array in `shared/gameLogic.js`
-- **Game Settings**: Modify `GAME_CONFIG` in `shared/gameLogic.js`
-- **Styling**: Update `client/style.css` for visual changes
-
-## Future Enhancements
-
-- **Voice Chat**: WebRTC audio communication
-- **File Sharing**: Trade creature screenshots
-- **Persistence**: Save game state across sessions
-- **Mobile App**: Progressive Web App (PWA) features
-- **LAN Discovery**: Automatic local network player discovery
-
 ## Credits
 
-- **Original Game**: Brainrotini Gamini single-player version
-- **P2P Implementation**: WebRTC-based multiplayer conversion
-- **Music**: Background tracks for ambient gaming experience
+- **Developer**: N7Soul, ChatGPT, Claude Sonnet 4
+- **Design**: N7Soul, ChatGPT, Claude Sonnet 4
+- **Music**: A Day in My Life - Dark Cat
+https://uppbeat.io/t/dark-cat/a-day-in-my-life
+License code: OCEUTV2FDNJSUCNG
+- **Music**: Imaginatarium - Ian Aisling
+https://uppbeat.io/t/ian-aisling/imaginatarium
+License code: 5MJR674VYFOXMJZQ
+- **Music**: The Cleaner - Night Drift
+https://uppbeat.io/t/night-drift/the-cleaner
+License code: 8F897RJMSBLPBMW9
 - **Fonts**: Urban Shadow Sans Serif for stylized headers
 
 ---
