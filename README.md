@@ -21,25 +21,6 @@ A peer-to-peer multiplayer creature collection game where players can compete an
 
 Want to try the original game? Open https://n7soul.github.io/BRGame/ for the classic single-player experience.
 
-## Game Structure
-
-```
-BRMPGame/
-├── client/           # P2P multiplayer game (main game)
-│   ├── index.html    # P2P multiplayer interface
-│   ├── game.js       # WebRTC P2P implementation
-│   └── style.css     # Game styling
-├── shared/           # Game logic and creature data
-│   └── gameLogic.js  # Creatures, rarities, and utilities
-├── assets/           # Game assets (images, music, fonts)
-│   ├── fonts/        # Urban Shadow Sans Serif font
-│   ├── images/       # Background images
-│   └── music/        # Background music tracks
-├── index-original.html    # Original single-player version
-├── index-demo.html        # Demo page with game info
-└── README.md             # This file
-```
-
 ### WebRTC Implementation
 - **Direct Browser Connections**: No intermediary server needed
 - **NAT Traversal**: Uses STUN servers for connection setup
