@@ -701,7 +701,7 @@ const modalHtml = `
   </div>
 </div>`;
 document.body.insertAdjacentHTML('beforeend', modalHtml);
-// Collection modal (list of all creatures, show name only if owned, else ???)
+// Collection modal (list of all brainrots, show name only if owned, else ???)
 const collectionHtml = `
 <div id="collectionModal" class="modal-overlay hidden">
   <div class="modal-box-collection">
